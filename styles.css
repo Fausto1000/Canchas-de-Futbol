@@ -1,0 +1,301 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f8f9fa;
+}
+
+header {
+    background: linear-gradient(90deg, #003087, #0052cc);
+    color: white;
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffd700;
+}
+
+section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#inicio {
+    background: linear-gradient(180deg, #ffffff, #e9ecef);
+}
+
+#inicio h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #003087;
+    font-weight: 700;
+}
+
+.carousel {
+    position: relative;
+    max-width: 800px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
+    min-width: 100%;
+    position: relative;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.carousel-control.prev {
+    left: 10px;
+}
+
+.carousel-control.next {
+    right: 10px;
+}
+
+#canchas {
+    background: #fff;
+}
+
+#canchas .cancha-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cancha-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cancha-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cancha-card img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.cancha-card .team-logo {
+    width: 80px;
+    height: 80px;
+    display: block;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    border: 2px solid #003087;
+}
+
+.cancha-card h3 {
+    font-size: 1.8rem;
+    margin: 10px 0;
+    color: #003087;
+    font-weight: 600;
+}
+
+.cancha-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+.cancha-card ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.cancha-card ul li {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+}
+
+.cancha-card ul li .icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.cancha-card ul li a {
+    color: #0052cc;
+    text-decoration: none;
+}
+
+.cancha-card ul li a:hover {
+    text-decoration: underline;
+}
+
+.cancha-card .more-info {
+    background: #ffd700;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.cancha-card .more-info:hover {
+    background: #e6c200;
+}
+
+.cancha-card .extra-info {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.cancha-card .extra-info.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#contacto form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#contacto input, #contacto textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#contacto button {
+    background: #003087;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+#contacto button:hover {
+    background: #0052cc;
+}
+
+#form-message {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+footer {
+    background: linear-gradient(90deg, #003087, #0052cc);
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 60px;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #inicio h1 {
+        font-size: 2rem;
+    }
+
+    #canchas .cancha-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .carousel-item img {
+        height: 300px;
+    }
+}
