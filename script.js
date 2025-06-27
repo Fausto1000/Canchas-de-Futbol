@@ -44,3 +44,29 @@ document.querySelectorAll('.more-info').forEach(button => {
         button.textContent = extraInfo.classList.contains('hidden') ? 'Ver más' : 'Ver menos';
     });
 });
+
+// Cambiar tema claro/oscuro
+const toggleThemeBtn = document.getElementById('toggle-theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+function setTheme(dark) {
+    if (dark) {
+        document.body.classList.add('dark-theme');
+        toggleThemeBtn.textContent = '☀️ Modo Claro';
+    } else {
+        document.body.classList.remove('dark-theme');
+        toggleThemeBtn.textContent = '🌙 Modo Oscuro';
+    }
+}
+
+function getSavedTheme() {
+    return localStorage.getItem('theme') === 'dark';
+}
+
+setTheme(getSavedTheme() || prefersDark);
+
+toggleThemeBtn.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('dark-theme');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    setTheme(isDark);
+});

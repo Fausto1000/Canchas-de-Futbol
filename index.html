@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -56,6 +17,7 @@
                 <li><a href="#canchas">Canchas</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
+            <button id="toggle-theme">🌙 Modo Oscuro</button>
         </nav>
     </header>
 
@@ -65,15 +27,15 @@
         <div class="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="C:\Users\faust\OneDrive\Desktop\Imagenes Canchas para la página web\CanchaBoca.WEBP" alt="La Bombonera">
+                    <img src="imagenes/CanchaBoca.WEBP" alt="La Bombonera">
                     <div class="carousel-caption">La Bombonera - Boca Juniors</div>
                 </div>
                 <div class="carousel-item">
-                    <img src="C:\Users\faust\OneDrive\Desktop\Imagenes Canchas para la página web\CanchaRiver.jpg" alt="El Monumental">
+                    <img src="imagenes/CanchaRiver.jpg" alt="El Monumental">
                     <div class="carousel-caption">El Monumental - River Plate</div>
                 </div>
                 <div class="carousel-item">
-                    <img src="C:\Users\faust\OneDrive\Desktop\Imagenes Canchas para la página web\CanchaAlberto.jpg" alt="Mario Alberto Kempes">
+                    <img src="imagenes/CanchaAlberto.jpg" alt="Mario Alberto Kempes">
                     <div class="carousel-caption">Mario Alberto Kempes - Córdoba</div>
                 </div>
             </div>
@@ -90,9 +52,9 @@
     <section id="canchas">
         <h2>Mejores Canchas de Fútbol</h2>
         <div class="cancha-grid">
-            <div class="cancha-card">
-                <img src="https://via.placeholder.com/300x200?text=La+Bombonera" alt="La Bombonera">
-                <img src="https://via.placeholder.com/100x100?text=Logo+Boca+Juniors" alt="Logo Boca Juniors" class="team-logo">
+            <div class="cancha-card boca">
+                <img src="imagenes/CanchaBoca.WEBP" alt="La Bombonera">
+                <img src="imagenes/EscuchoBoca.WEBP" alt="Logo Boca Juniors" class="team-logo">
                 <h3>La Bombonera</h3>
                 <p>Estadio Alberto J. Armando, hogar de Boca Juniors. Conocido por su acústica única y la vibración de sus tribunas, apodado "La 12" por la pasión de sus hinchas, los "Xeneizes". Inaugurado en 1940, es un ícono del fútbol mundial.</p>
                 <ul>
@@ -108,9 +70,9 @@
                     <p><strong>Logros:</strong> 6 Copas Libertadores, 3 Copas Intercontinentales, y 35 títulos de Primera División.</p>[](https://en.wikipedia.org/wiki/Boca_Juniors)
                 </div>
             </div>
-            <div class="cancha-card">
-                <img src="https://via.placeholder.com/300x200?text=El+Monumental" alt="El Monumental">
-                <img src="https://via.placeholder.com/100x100?text=Logo+River+Plate" alt="Logo River Plate" class="team-logo">
+            <div class="cancha-card river">
+                <img src="imagenes/CanchaRiver.jpg" alt="El Monumental">
+                <img src="imagenes/EscuchoRiver.jfif" alt="Logo River Plate" class="team-logo">
                 <h3>El Monumental</h3>
                 <p>Estadio Antonio Vespucio Liberti, casa de River Plate y la Selección Argentina. El más grande del país, apodado "El Coloso". Sus hinchas, los "Millonarios", lo consideran un templo del fútbol. Inaugurado en 1938.</p>
                 <ul>
@@ -126,9 +88,9 @@
                     <p><strong>Logros:</strong> 38 títulos de Primera División, 4 Copas Libertadores, 1 Copa Intercontinental.</p>[](https://landingpadba.com/football-argentina-main-teams-summarized/)
                 </div>
             </div>
-            <div class="cancha-card">
-                <img src="https://via.placeholder.com/300x200?text=Mario+Kempes" alt="Mario Alberto Kempes">
-                <img src="https://via.placeholder.com/100x100?text=Logo+Talleres" alt="Logo Talleres" class="team-logo">
+            <div class="cancha-card talleres">
+                <img src="imagenes/CanchaAlberto.jpg" alt="Mario Alberto Kempes">
+                <img src="imagenes/EscuchoTalleres.jpg" alt="Logo Talleres" class="team-logo">
                 <h3>Estadio Mario Alberto Kempes</h3>
                 <p>Emblemático estadio en Córdoba, hogar de Talleres. Apodado "El Chateau", lleva el nombre del legendario goleador Mario Kempes. Sus hinchas, los "Matadores", llenan de pasión el estadio. Inaugurado en 1978.</p>
                 <ul>
@@ -144,9 +106,9 @@
                     <p><strong>Logros:</strong> Sede de la Copa América 1987 y 2011, hogar de Talleres en su título de Primera División 1998.</p>[](https://www.vavel.com/en-us/soccer/2024/11/28/1205715-boca-juniors-vs-velez-sarsfield-live-score-updates-stream-info-and-how-to-watch-argentine-cup-match.html)
                 </div>
             </div>
-            <div class="cancha-card">
-                <img src="https://via.placeholder.com/300x200?text=Libertadores+de+America" alt="Libertadores de América">
-                <img src="https://via.placeholder.com/100x100?text=Logo+Independiente" alt="Logo Independiente" class="team-logo">
+            <div class="cancha-card independiente">
+                <img src="imagenes/CanchaIndependiente.WEBP" alt="Libertadores de América">
+                <img src="imagenes/EscuchoIndependiente.jfif" alt="Logo Independiente" class="team-logo">
                 <h3>Estadio Libertadores de América</h3>
                 <p>Hogar de Independiente, conocido como "Rey de Copas" por sus hinchas, los "Diablos Rojos". Apodado "Doble Visera" por su diseño original. Renovado en 2009, es un símbolo de Avellaneda.</p>
                 <ul>
@@ -162,9 +124,9 @@
                     <p><strong>Logros:</strong> 7 Copas Libertadores (récord), 2 Copas Intercontinentales, 16 títulos de Primera División.</p>[](https://en.wikipedia.org/wiki/Big_Five_%28Argentine_football%29)
                 </div>
             </div>
-            <div class="cancha-card">
-                <img src="https://via.placeholder.com/300x200?text=Jose+Amalfitani" alt="José Amalfitani">
-                <img src="https://via.placeholder.com/100x100?text=Logo+Vélez+Sarsfield" alt="Logo Vélez Sarsfield" class="team-logo">
+            <div class="cancha-card velez">
+                <img src="imagenes/CanchaVelez.jpg" alt="José Amalfitani">
+                <img src="imagenes/EscuchoVelez.jfif" alt="Logo Vélez Sarsfield" class="team-logo">
                 <h3>Estadio José Amalfitani</h3>
                 <p>Casa de Vélez Sarsfield, apodado "El Fortín" por su solidez defensiva. Los hinchas, "La Pandilla de Liniers", crean un ambiente único. Inaugurado en 1943, es un estadio versátil.</p>
                 <ul>
@@ -180,9 +142,9 @@
                     <p><strong>Logros:</strong> 11 títulos de Primera División, 1 Copa Libertadores (1994), 1 Copa Intercontinental.</p>[](https://en.wikipedia.org/wiki/Club_Atl%25C3%25A9tico_V%25C3%25A9lez_Sarsfield)
                 </div>
             </div>
-            <div class="cancha-card">
-                <img src="https://via.placeholder.com/300x200?text=Presidente+Peron" alt="Presidente Perón">
-                <img src="https://via.placeholder.com/100x100?text=Logo+Racing+Club" alt="Logo Racing Club" class="team-logo">
+            <div class="cancha-card racing">
+                <img src="imagenes/CanchaRacing.jfif" alt="Presidente Perón">
+                <img src="imagenes/EscuchoRacing.jfif" alt="Logo Racing Club" class="team-logo">
                 <h3>Estadio Presidente Perón</h3>
                 <p>Hogar de Racing Club, conocido como "El Cilindro" por su forma. Los hinchas, "La Academia", son famosos por su pasión. Inaugurado en 1950, es clave en el Clásico de Avellaneda.</p>
                 <ul>
@@ -203,20 +165,25 @@
 
     <section id="contacto">
         <h2>Contacto</h2>
-        <form id="contact-form">
+        <form action="https://formspree.io/f/PON_AQUI_TU_ID_DE_FORMSPREE" method="POST">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             <label for="mensaje">Mensaje:</label>
             <textarea id="mensaje" name="mensaje" required></textarea>
             <button type="submit">Enviar</button>
         </form>
-        <p id="form-message"></p>
     </section>
 
+    <div class="agradecimiento">
+        ¡Gracias por visitar nuestra Web!
+    </div>
+
     <footer>
-        <p>© 2025 Canchas Argentinas | Proyecto Escolar</p>
+        <p><span class="copyright">©</span> 2025 Canchas Argentinas | Proyecto Escolar</p>
     </footer>
 
     <script src="script.js"></script>
